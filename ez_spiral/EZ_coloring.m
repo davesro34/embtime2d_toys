@@ -10,7 +10,7 @@ close all
 %% Read Images
 % The first step is to read in images.
 % directory where images are stored
-image_dir = 'outputs';
+image_dir = 'outputs2';
 % prefix for each image
 image_name = 'fc';
 % image type/extension
@@ -63,16 +63,24 @@ end
 [V,D]=eig(A);
 [d,ind]=sort(diag(D),'descend');
 V=V(:,ind);
-figure
-for i=1:3
-    subplot(1,3,i)
-    plot(V(:,i+1))
-end
-xlabel('Time')
-ylabel('dmaps 1')
-%% Color
 test_ind=2:2:nimages;
 train_ind=1:nimages; train_ind(test_ind)=[];
+figure
+subplot(1,2,1)
+hold on
+plot((train_ind),V(train_ind,2),'.')
+plot((test_ind),V(test_ind,2),'.')
+legend('Training','Testing')
+xlabel('Time')
+ylabel('dmaps 1')
+subplot(1,2,2)
+hold on
+plot(V(train_ind,3),V(train_ind,2),'.')
+plot(V(test_ind,3),V(test_ind,2),'.')
+legend('Training','Testing')
+xlabel('dmaps 2')
+ylabel('dmaps 1')
+%% Color
 test_colored=noisy(:,:,:,test_ind);
 for i=1:length(test_ind)
     [~,ind]=sort(abs(V(train_ind,2)-V(test_ind(i),2)));
