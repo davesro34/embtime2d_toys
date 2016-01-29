@@ -10,7 +10,7 @@ close all
 %% Read Images
 % The first step is to read in images.
 % directory where images are stored
-image_dir = 'outputs2';
+image_dir = 'outputs';
 % prefix for each image
 image_name = 'fc';
 % image type/extension
